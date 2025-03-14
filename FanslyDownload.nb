@@ -1,0 +1,1140 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[     52501,       1119]
+NotebookOptionsPosition[     52585,       1109]
+NotebookOutlinePosition[     52997,       1126]
+CellTagsIndexPosition[     52954,       1123]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\:524d\:671f\:51c6\:5907", "Section",
+ CellChangeTimes->{{3.9262368620286083`*^9, 3.926236866106367*^9}, {
+  3.931855228569412*^9, 
+  3.931855229680687*^9}},ExpressionUUID->"78136e59-7583-b746-b937-\
+e350159ac2f5"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "\:6e05\:9664\:5b9a\:4e49", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "\:4e0b\:8f7d\:6240\:9700\:7684\:8d44\:6e90", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SetDirectory", "[", 
+     RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"resource", "=", 
+     RowBox[{"{", "\"\<CrawlerTools.wl\>\"", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"repository", "=", 
+        RowBox[{"Import", "[", 
+         RowBox[{
+          RowBox[{"\"\<https://github.com/Li3Zi3han2/\>\"", "<>", 
+           RowBox[{"StringExtract", "[", 
+            RowBox[{
+             RowBox[{"resource", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], ",", 
+             RowBox[{"\"\<.\>\"", "->", "1"}]}], "]"}], 
+           "<>", "\"\</releases/latest\>\""}], ",", "\"\<XMLObject\>\""}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"md5", "=", 
+        RowBox[{
+         RowBox[{"Cases", "[", 
+          RowBox[{"repository", ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"XMLElement", "[", 
+              RowBox[{"\"\<p\>\"", ",", 
+               RowBox[{"{", "}"}], ",", 
+               RowBox[{"{", "md5_", "}"}]}], "]"}], "/;", 
+             RowBox[{"StringMatchQ", "[", 
+              RowBox[{"md5", ",", 
+               RowBox[{"\"\<MD5: \>\"", "~~", 
+                RowBox[{"HexadecimalCharacter", ".."}]}]}], "]"}]}], ":>", 
+            RowBox[{"StringExtract", "[", 
+             RowBox[{"md5", ",", 
+              RowBox[{"\"\<MD5: \>\"", "->", 
+               RowBox[{"-", "1"}]}]}], "]"}]}], ",", 
+           RowBox[{"+", "\[Infinity]"}]}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"Quiet", "[", 
+          RowBox[{
+           RowBox[{"FileHash", "[", 
+            RowBox[{
+             RowBox[{"resource", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], ",", "\"\<MD5\>\"", 
+             ",", "\"\<HexString\>\""}], "]"}], "=!=", "md5"}], "]"}], ",", 
+         RowBox[{"URLDownload", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Cases", "[", 
+             RowBox[{"repository", ",", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"XMLElement", "[", 
+                 RowBox[{"\"\<meta\>\"", ",", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    
+                    RowBox[{"\"\<name\>\"", 
+                    "\[Rule]", "\"\<apple-itunes-app\>\""}], ",", 
+                    RowBox[{"\"\<content\>\"", "\[Rule]", "url_"}]}], "}"}], ",", 
+                  RowBox[{"{", "}"}]}], "]"}], "/;", 
+                RowBox[{"StringMatchQ", "[", 
+                 RowBox[{"url", ",", 
+                  RowBox[{"\"\<app-id=\>\"", "~~", 
+                   RowBox[{"DigitCharacter", ".."}], 
+                   "~~", "\"\<, app-argument=\>\"", "~~", "__"}]}], "]"}]}], ":>", 
+               RowBox[{
+                RowBox[{"StringReplace", "[", 
+                 RowBox[{
+                  RowBox[{"StringExtract", "[", 
+                   RowBox[{"url", ",", 
+                    RowBox[{"\"\<app-argument=\>\"", "->", 
+                    RowBox[{"-", "1"}]}]}], "]"}], ",", 
+                  RowBox[{"\"\</tag/\>\"", "->", "\"\</download/\>\""}]}], 
+                 "]"}], "<>", "\"\</\>\"", "<>", 
+                RowBox[{"resource", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}]}], ",", 
+              RowBox[{"+", "\[Infinity]"}]}], "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", 
+           RowBox[{"resource", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Get", "[", 
+        RowBox[{
+         RowBox[{"resource", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], ",", 
+         RowBox[{"CharacterEncoding", "->", "\"\<UTF-8\>\""}]}], "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{"Length", "[", "resource", "]"}]}], "}"}]}], "]"}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.931846304839657*^9, 3.931846312517628*^9}, {
+   3.93184634929755*^9, 3.931846391027767*^9}, {3.931846433075453*^9, 
+   3.931846440047542*^9}, {3.931846864311786*^9, 3.931846903558399*^9}, {
+   3.931846963567194*^9, 3.931846989182136*^9}, {3.931847280344131*^9, 
+   3.931847327412908*^9}, {3.931847686396967*^9, 3.9318477222269993`*^9}, {
+   3.9318477628724613`*^9, 3.931847787699964*^9}, {3.931854271731457*^9, 
+   3.931854296388603*^9}, {3.931854327578861*^9, 3.931854455375112*^9}, 
+   3.9318545180431767`*^9, {3.931855010073702*^9, 3.931855010352888*^9}, 
+   3.931855055094202*^9, {3.931855154018984*^9, 3.931855164119299*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"68fb5111-29f5-1642-8338-e7c667090edb"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\:5b9a\:4e49\:51fd\:6570", "Section",
+ CellChangeTimes->{{3.9262368620286083`*^9, 3.926236866106367*^9}, {
+  3.931855242592684*^9, 
+  3.931855244574152*^9}},ExpressionUUID->"062d0e97-5b76-6e40-94ad-\
+1959513e77fc"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "(*", "\:4e0b\:8f7d\:67d0\:4e00\:4f5c\:8005\:6700\:65b0\:7684\:6570\:4e2a\
+\:5e16\:5b50", "*)"}], "\n", 
+  RowBox[{
+  "(*", "\:4e0b\:8f7d\:4ece\:7b2cn1\:4e2a\:5230\:7b2cn2\:4e2a", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"FanslyDownload", "[", 
+      RowBox[{
+       RowBox[{"userURL_", "/;", 
+        RowBox[{"StringMatchQ", "[", 
+         RowBox[{"userURL", ",", 
+          
+          RowBox[{"\"\<https://fansly.com/\>\"", "~~", "__", 
+           "~~", "\"\</posts\>\""}]}], "]"}]}], ",", "dir_String", ",", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"n1_Integer", ",", "n2_Integer"}], "}"}], "/;", 
+        RowBox[{"1", "<=", "n1", "<=", "n2"}]}]}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "pause", ",", "header", ",", "userAPI", ",", "pageAPI", ",", 
+         "postAPI", ",", "mediaAPI", ",", "username", ",", "userJSON", ",", 
+         "userDataset", ",", "userID", ",", "pageFile", ",", "pageJSON", ",", 
+         "pageDataset", ",", "postID", ",", "postDataset", ",", 
+         "mediaBundleDataset", ",", "mediaDataset", ",", "pollDataset", ",", 
+         "result", ",", "createdDate", ",", "attachment", ",", 
+         "mediaJoinedDataset", ",", "tempID", ",", "missingMediaID", ",", 
+         "missingMediaDataset", ",", "pollJoinedDataset", ",", "imageURL", ",",
+          "ext", ",", "temp", ",", "pollContent"}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", "\:8bbe\:7f6e\:6682\:505c\:65f6\:957f", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"pause", "=", "1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+        "(*", "\:6062\:590d\:4ee3\:7406\:8bbe\:7f6e\:539f\:59cb\:503c", 
+         "*)"}], "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"$DefaultProxyRules", "[", "\"\<UseProxy\>\"", "]"}], "=", 
+         "Automatic"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", "\:521b\:5efa\:8f93\:51fa\:76ee\:5f55", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"CreateDirectory", "[", "dir", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", "\:8bbe\:7f6e\:5de5\:4f5c\:76ee\:5f55", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"SetDirectory", "[", "dir", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "\:8bf7\:6c42\:5934", "\:ff0c", 
+          "\:5176\:4e2dauthorization\:5fc5\:9700"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{
+        "header", 
+         "=", "\"\<-H \\\"authorization: \[FilledRectangle]\[FilledRectangle]\
+\[FilledRectangle]\[FilledRectangle]\[FilledRectangle]\[FilledRectangle]\\\"\>\
+\""}], ";", "\[IndentingNewLine]", 
+        RowBox[{"header", "=", 
+         RowBox[{"StringCases", "[", 
+          RowBox[{"header", ",", 
+           RowBox[{
+            RowBox[{"\"\<\\\"\>\"", "~~", 
+             RowBox[{"Shortest", "[", "key__", "]"}], "~~", "\"\<: \>\"", "~~", 
+             RowBox[{"Shortest", "[", "value__", "]"}], 
+             "~~", "\"\<\\\"\>\""}], ":>", 
+            RowBox[{"(", 
+             RowBox[{"key", "->", "value"}], ")"}]}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", "\:7528\:5230\:7684API", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"userAPI", "[", "usernames_", "]"}], ":=", 
+         RowBox[{"URLBuild", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            
+            RowBox[{"\"\<https://apiv3.fansly.com\>\"", ",", "\"\<api\>\"", 
+             ",", "\"\<v1\>\"", ",", "\"\<account\>\""}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"\"\<usernames\>\"", "->", "usernames"}], "}"}]}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"pageAPI", "[", 
+          RowBox[{"userID_", ",", "postID_"}], "]"}], ":=", 
+         RowBox[{"URLBuild", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            
+            RowBox[{"\"\<https://apiv3.fansly.com\>\"", ",", "\"\<api\>\"", 
+             ",", "\"\<v1\>\"", ",", "\"\<timelinenew\>\"", ",", "userID"}], 
+            "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"\"\<before\>\"", "->", "postID"}], "}"}]}], "]"}]}], ";",
+         "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"postAPI", "[", "postIDs_", "]"}], ":=", 
+         RowBox[{"URLBuild", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            
+            RowBox[{"\"\<https://apiv3.fansly.com\>\"", ",", "\"\<api\>\"", 
+             ",", "\"\<v1\>\"", ",", "\"\<post\>\""}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"\"\<ids\>\"", "->", "postIDs"}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"mediaAPI", "[", "mediaIDs_", "]"}], ":=", 
+         RowBox[{"URLBuild", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            
+            RowBox[{"\"\<https://apiv3.fansly.com\>\"", ",", "\"\<api\>\"", 
+             ",", "\"\<v1\>\"", ",", "\"\<account\>\"", 
+             ",", "\"\<media\>\""}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"\"\<ids\>\"", "->", "mediaIDs"}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", "\:7528\:6237\:4fe1\:606f", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"username", "=", 
+         RowBox[{"StringExtract", "[", 
+          RowBox[{"userURL", ",", 
+           RowBox[{"\"\</\>\"", "->", 
+            RowBox[{"-", "2"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"userJSON", "=", 
+         RowBox[{"ImportJSONFromURL", "[", 
+          RowBox[{
+           RowBox[{"userAPI", "[", "username", "]"}], ",", "header"}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"userDataset", "=", 
+         RowBox[{"FromJSONToDataset", "[", "userJSON", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"userID", "=", 
+         RowBox[{"userDataset", "[", 
+          RowBox[{"\"\<response\>\"", ",", "1", ",", "\"\<id\>\""}], "]"}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", "\:9875\:9762\:4fe1\:606f", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "\:5982\:679c\:6587\:4ef6\:5b58\:5728", "\:ff0c", 
+          "\:5219\:5bfc\:5165\:6587\:4ef6"}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"pageFile", "=", 
+         RowBox[{"FileNames", "[", 
+          RowBox[{"\"\<page\>\"", "~~", 
+           RowBox[{"Repeated", "[", 
+            RowBox[{"DigitCharacter", ",", 
+             RowBox[{"{", "8", "}"}]}], "]"}], "~~", "\"\<.json\>\""}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"pageFile", "!=", 
+           RowBox[{"{", "}"}]}], ",", 
+          RowBox[{
+           RowBox[{"pageJSON", "=", 
+            RowBox[{"Import", "[", 
+             RowBox[{"pageFile", "[", 
+              RowBox[{"[", 
+               RowBox[{"-", "1"}], "]"}], "]"}], "]"}]}], ";", 
+           RowBox[{"pageDataset", "=", 
+            RowBox[{"FromJSONToDataset", "[", "pageJSON", "]"}]}]}]}], "]"}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "\:5982\:679c\:6587\:4ef6\:4e0d\:5b58\:5728\:6216\:6700\:65b0\:5e16\
+\:5b50ID\:4e0d\:76f8\:7b49", "\:ff0c", "\:5219\:66f4\:65b0\:6587\:4ef6"}], 
+         "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"pageFile", "==", 
+            RowBox[{"{", "}"}]}], "||", 
+           RowBox[{
+            RowBox[{"pageDataset", "[", 
+             RowBox[{
+             "1", ",", "\"\<response\>\"", ",", "\"\<posts\>\"", ",", "1", 
+              ",", "\"\<id\>\""}], "]"}], "!=", 
+            RowBox[{
+             RowBox[{"FromJSONToDataset", "[", 
+              RowBox[{"ImportJSONFromURL", "[", 
+               RowBox[{
+                RowBox[{"pageAPI", "[", 
+                 RowBox[{"userID", ",", "\"\<0\>\""}], "]"}], ",", "header"}],
+                "]"}], "]"}], "[", 
+             
+             RowBox[{"\"\<response\>\"", ",", "\"\<posts\>\"", ",", "1", 
+              ",", "\"\<id\>\""}], "]"}]}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"pageJSON", "=", 
+            RowBox[{
+             RowBox[{"Reap", "[", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"postID", "=", "\"\<0\>\""}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"Do", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Pause", "[", "pause", "]"}], ";", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"pageJSON", "=", 
+                   RowBox[{"ImportJSONFromURL", "[", 
+                    RowBox[{
+                    RowBox[{"pageAPI", "[", 
+                    RowBox[{"userID", ",", "postID"}], "]"}], ",", "header"}],
+                     "]"}]}], ";", "\[IndentingNewLine]", 
+                  RowBox[{"pageDataset", "=", 
+                   RowBox[{"FromJSONToDataset", "[", "pageJSON", "]"}]}], ";",
+                   "\[IndentingNewLine]", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{"MissingQ", "[", 
+                    RowBox[{"postID", "=", 
+                    RowBox[{"pageDataset", "[", 
+                    RowBox[{"\"\<response\>\"", ",", "\"\<posts\>\"", ",", 
+                    RowBox[{"-", "1"}], ",", "\"\<id\>\""}], "]"}]}], "]"}], ",", 
+                    RowBox[{"Break", "[", "]"}], ",", 
+                    RowBox[{"Sow", "[", "pageJSON", "]"}]}], "]"}]}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"{", 
+                  RowBox[{"i", ",", "1", ",", "\[Infinity]"}], "}"}]}], 
+                "]"}]}], "\[IndentingNewLine]", "]"}], "[", 
+             RowBox[{"[", 
+              RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Export", "[", 
+            RowBox[{
+             RowBox[{"\"\<page\>\"", "<>", 
+              RowBox[{"DateString", "[", 
+               RowBox[{"Today", ",", 
+                RowBox[{"{", 
+                 
+                 RowBox[{"\"\<Year\>\"", ",", "\"\<Month\>\"", 
+                  ",", "\"\<Day\>\""}], "}"}]}], "]"}], 
+              "<>", "\"\<.json\>\""}], ",", "pageJSON"}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"pageDataset", "=", 
+            RowBox[{"FromJSONToDataset", "[", "pageJSON", "]"}]}]}]}], "]"}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "\:5e16\:5b50\:4fe1\:606f", "\:ff0c", 
+          "\:5df2\:6309\:521b\:5efa\:65f6\:95f4\:4ece\:65b0\:5230\:65e7\:6392\
+\:5e8f"}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"postDataset", "=", 
+         RowBox[{
+          RowBox[{"KeyUnion", "@*", "Join"}], "@@", 
+          RowBox[{"pageDataset", "[", 
+           RowBox[{"All", ",", "\"\<response\>\"", ",", "\"\<posts\>\""}], 
+           "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"postDataset", "=", 
+         RowBox[{"postDataset", "[", 
+          RowBox[{"ReverseSortBy", "[", 
+           RowBox[{
+            RowBox[{"#", "[", "\"\<createdAt\>\"", "]"}], "&"}], "]"}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "\:5a92\:4f53\:4fe1\:606f", "\:ff0c", 
+          "\:7528\:4e8e\:4ea4\:53c9\:8fde\:63a5", "\:ff0c", 
+          "\:65e0\:9700\:6392\:5e8f"}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"mediaBundleDataset", "=", 
+         RowBox[{
+          RowBox[{"KeyUnion", "@*", "Join"}], "@@", 
+          RowBox[{"pageDataset", "[", 
+           RowBox[{
+           "All", ",", "\"\<response\>\"", 
+            ",", "\"\<accountMediaBundles\>\""}], "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"mediaDataset", "=", 
+         RowBox[{
+          RowBox[{"KeyUnion", "@*", "Join"}], "@@", 
+          RowBox[{"pageDataset", "[", 
+           RowBox[{
+           "All", ",", "\"\<response\>\"", ",", "\"\<accountMedia\>\""}], 
+           "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"pollDataset", "=", 
+         RowBox[{
+          RowBox[{"KeyUnion", "@*", "Join"}], "@@", 
+          RowBox[{"pageDataset", "[", 
+           RowBox[{"All", ",", "\"\<response\>\"", ",", "\"\<polls\>\""}], 
+           "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"result", "=", 
+         RowBox[{"Table", "[", "\[IndentingNewLine]", 
+          RowBox[{"(*", "\:7b2ci\:4e2a\:5e16\:5b50\:7684id", "*)"}], 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"postID", "=", 
+             RowBox[{"postDataset", "[", 
+              RowBox[{"i", ",", "\"\<id\>\""}], "]"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+            "(*", "\:7b2ci\:4e2a\:5e16\:5b50\:7684\:521b\:5efa\:65e5\:671f", 
+             "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"createdDate", "=", 
+             RowBox[{"DateString", "[", 
+              RowBox[{
+               RowBox[{"TimeZoneConvert", "[", 
+                RowBox[{
+                 RowBox[{"FromUnixTime", "[", 
+                  RowBox[{
+                   RowBox[{"postDataset", "[", 
+                    RowBox[{"i", ",", "\"\<createdAt\>\""}], "]"}], ",", 
+                   RowBox[{"TimeZone", "->", "8"}]}], "]"}], ",", 
+                 "$TimeZone"}], "]"}], ",", 
+               RowBox[{"{", 
+                
+                RowBox[{"\"\<Year\>\"", ",", "\"\<Month\>\"", 
+                 ",", "\"\<Day\>\""}], "}"}]}], "]"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+            "(*", "\:7b2ci\:4e2a\:5e16\:5b50\:7684\:9644\:4ef6", "*)"}], 
+            "\[IndentingNewLine]", 
+            RowBox[{"attachment", "=", 
+             RowBox[{"postDataset", "[", 
+              RowBox[{"i", ",", "\"\<attachments\>\""}], "]"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", "\:5982\:679c\:9644\:4ef6\:4e3a\:7a7a", "*)"}], 
+            "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Length", "[", "attachment", "]"}], "==", "0"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+              "(*", "\:90a3\:4e48\:5bfc\:51fa\:6587\:5b57\:5185\:5bb9", 
+               "*)"}], "\[IndentingNewLine]", 
+              RowBox[{"File", "[", 
+               RowBox[{"Export", "[", 
+                RowBox[{
+                 RowBox[{
+                 "createdDate", "<>", "\"\< - \>\"", "<>", "postID", 
+                  "<>", "\"\< - 01.txt\>\""}], ",", 
+                 RowBox[{"postDataset", "[", 
+                  RowBox[{"i", ",", "\"\<content\>\""}], "]"}]}], "]"}], 
+               "]"}], ",", "\[IndentingNewLine]", 
+              RowBox[{"(*", "\:5426\:5219", "*)"}], "\[IndentingNewLine]", 
+              RowBox[{"(*", 
+               RowBox[{
+               "\:9644\:4ef6\:7684contentType\:4e3a1\:65f6", "\:ff0c", 
+                "contentId\:6307\:5411mediaDataset", "\:ff1b", 
+                "\:9644\:4ef6\:7684contentType\:4e3a2\:65f6", "\:ff0c", 
+                "contentId\:6307\:5411mediaBundleDataset", "\:ff1b", 
+                "\:9644\:4ef6\:7684contentType\:4e3a42001\:65f6", "\:ff0c", 
+                "contentId\:6307\:5411pollDataset"}], "*)"}], 
+              "\[IndentingNewLine]", 
+              RowBox[{"(*", 
+               RowBox[{
+               "\:83b7\:53d6attachment", "->", 
+                "mediaDataset\:7684\:90e8\:5206"}], "*)"}], 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"mediaJoinedDataset", "[", "1", "]"}], "=", 
+                RowBox[{
+                 RowBox[{"JoinAcross", "[", 
+                  RowBox[{"attachment", ",", "mediaDataset", ",", 
+                   RowBox[{"\"\<contentId\>\"", "->", "\"\<id\>\""}]}], "]"}],
+                  "[", 
+                 RowBox[{"All", ",", 
+                  RowBox[{"<|", 
+                   RowBox[{
+                    RowBox[{"\"\<rawId\>\"", "->", "\"\<id\>\""}], ",", 
+                    RowBox[{"\"\<media\>\"", "->", "\"\<media\>\""}]}], 
+                   "|>"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"(*", 
+                RowBox[{"\:83b7\:53d6attachment", "->", 
+                 RowBox[{
+                 "mediaBundleDataset", "->", 
+                  "mediaDataset\:7684\:90e8\:5206"}]}], "*)"}], 
+               "\[IndentingNewLine]", 
+               RowBox[{"tempID", "=", 
+                RowBox[{"Dataset", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"<|", 
+                    RowBox[{"\"\<accountMediaIds\>\"", "->", "#"}], "|>"}], 
+                   "&"}], "/@", 
+                  RowBox[{"Flatten", "[", 
+                   RowBox[{"Normal", "[", 
+                    RowBox[{
+                    RowBox[{"JoinAcross", "[", 
+                    RowBox[{"attachment", ",", "mediaBundleDataset", ",", 
+                    RowBox[{"\"\<contentId\>\"", "->", "\"\<id\>\""}]}], 
+                    "]"}], "[", 
+                    RowBox[{"All", ",", "\"\<accountMediaIds\>\""}], "]"}], 
+                    "]"}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"mediaJoinedDataset", "[", "2", "]"}], "=", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"Length", "[", "tempID", "]"}], "==", "0"}], ",", 
+                  RowBox[{"Dataset", "[", 
+                   RowBox[{"{", "}"}], "]"}], ",", 
+                  RowBox[{
+                   RowBox[{"JoinAcross", "[", 
+                    RowBox[{"tempID", ",", "mediaDataset", ",", 
+                    RowBox[{"\"\<accountMediaIds\>\"", "->", "\"\<id\>\""}], 
+                    ",", "\"\<Left\>\""}], "]"}], "[", 
+                   RowBox[{"All", ",", 
+                    RowBox[{"<|", 
+                    RowBox[{
+                    
+                    RowBox[{"\"\<rawId\>\"", 
+                    "->", "\"\<accountMediaIds\>\""}], ",", 
+                    RowBox[{"\"\<media\>\"", "->", "\"\<media\>\""}]}], 
+                    "|>"}]}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"(*", 
+                RowBox[{
+                "\:7ec4\:5408\:5f97\:5230\:5168\:90e8\:7684attachment", "->", 
+                 RowBox[{"mediaDataset", 
+                  RowBox[{"\:ff08", "\:542b\:7f3a\:5931", "\:ff09"}]}]}], 
+                "*)"}], "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "=", 
+                RowBox[{"Join", "[", 
+                 RowBox[{
+                  RowBox[{"mediaJoinedDataset", "[", "1", "]"}], ",", 
+                  RowBox[{"mediaJoinedDataset", "[", "2", "]"}]}], "]"}]}], ";",
+                "\[IndentingNewLine]", 
+               RowBox[{
+               "(*", "\:5982\:679c\:7f3a\:5931\:4e2a\:6570\:5927\:4e8e0", 
+                "*)"}], "\[IndentingNewLine]", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                   RowBox[{
+                    RowBox[{"Count", "[", 
+                    RowBox[{"Missing", "[", "\"\<Unmatched\>\"", "]"}], "]"}],
+                     ",", "\"\<media\>\""}], "]"}], ">", "0"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"(*", 
+                  RowBox[{
+                  "attachment", "->", 
+                   "mediaDataset\:7684\:65e0\:7f3a\:5931\:90e8\:5206"}], 
+                  "*)"}], "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"mediaJoinedDataset", "[", "4", "]"}], "=", 
+                   RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"!", 
+                    RowBox[{"MissingQ", "[", 
+                    RowBox[{"#", "[", "\"\<media\>\"", "]"}], "]"}]}], "&"}], 
+                    "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+                  RowBox[{"(*", 
+                   RowBox[{
+                   "attachment", "->", 
+                    "mediaDataset\:7684\:7f3a\:5931\:90e8\:5206"}], "*)"}], 
+                  "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"mediaJoinedDataset", "[", "5", "]"}], "=", 
+                   RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"MissingQ", "[", 
+                    RowBox[{"#", "[", "\"\<media\>\"", "]"}], "]"}], "&"}], 
+                    "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+                  RowBox[{"missingMediaID", "=", 
+                   RowBox[{"StringRiffle", "[", 
+                    RowBox[{
+                    RowBox[{"Normal", "[", 
+                    RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "5", "]"}], "[", 
+                    RowBox[{"All", ",", "\"\<rawId\>\""}], "]"}], "]"}], 
+                    ",", "\"\<,\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+                  RowBox[{"missingMediaDataset", "=", 
+                   RowBox[{
+                    RowBox[{"FromJSONToDataset", "[", 
+                    RowBox[{"ImportJSONFromURL", "[", 
+                    RowBox[{
+                    RowBox[{"mediaAPI", "[", "missingMediaID", "]"}], ",", 
+                    "header"}], "]"}], "]"}], "[", "\"\<response\>\"", 
+                    "]"}]}], ";", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"mediaJoinedDataset", "[", "5", "]"}], "=", 
+                   RowBox[{
+                    RowBox[{"JoinAcross", "[", 
+                    RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "5", "]"}], ",", 
+                    "missingMediaDataset", ",", 
+                    RowBox[{"\"\<rawId\>\"", "->", "\"\<id\>\""}], ",", 
+                    RowBox[{"KeyCollisionFunction", "->", "Right"}]}], "]"}], 
+                    "[", 
+                    RowBox[{"All", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<rawId\>\"", ",", "\"\<media\>\""}], "}"}]}], 
+                    "]"}]}], ";", "\[IndentingNewLine]", 
+                  RowBox[{"(*", 
+                   RowBox[{
+                   "\:7ec4\:5408\:5f97\:5230\:5168\:90e8\:7684attachment", "->", 
+                    RowBox[{"mediaDataset", 
+                    RowBox[{
+                    "\:ff08", "\:4e0d\:542b\:7f3a\:5931", "\:ff09"}]}]}], 
+                   "*)"}], "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "=", 
+                   RowBox[{"Join", "[", 
+                    RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "4", "]"}], ",", 
+                    RowBox[{"mediaJoinedDataset", "[", "5", "]"}]}], 
+                    "]"}]}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "=", 
+                RowBox[{
+                 RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                 RowBox[{"SortBy", "[", 
+                  RowBox[{
+                   RowBox[{"#", "[", "\"\<rawId\>\"", "]"}], "&"}], "]"}], 
+                 "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"(*", 
+                RowBox[{
+                "\:83b7\:53d6attachment", "->", 
+                 "pollDataset\:7684\:90e8\:5206"}], "*)"}], 
+               "\[IndentingNewLine]", 
+               RowBox[{"pollJoinedDataset", "=", 
+                RowBox[{
+                 RowBox[{"JoinAcross", "[", 
+                  RowBox[{"attachment", ",", "pollDataset", ",", 
+                   RowBox[{"\"\<contentId\>\"", "->", "\"\<id\>\""}]}], "]"}],
+                  "[", 
+                 RowBox[{"All", ",", 
+                  RowBox[{"<|", 
+                   RowBox[{
+                    RowBox[{"\"\<rawId\>\"", "->", "\"\<id\>\""}], ",", 
+                    RowBox[{"\"\<title\>\"", "->", "\"\<title\>\""}], ",", 
+                    RowBox[{"\"\<options\>\"", "->", "\"\<options\>\""}]}], 
+                   "|>"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"Table", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Pause", "[", "pause", "]"}], ";", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{"j", "<=", 
+                    RowBox[{"Length", "[", 
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "]"}]}], ",", \
+"\[IndentingNewLine]", 
+                    RowBox[{"Which", "[", "\[IndentingNewLine]", 
+                    RowBox[{"(*", "\:56fe\:7247", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                    RowBox[{"j", ",", "\"\<media\>\"", ",", "\"\<type\>\""}], 
+                    "]"}], "==", "1"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"imageURL", "=", 
+                    RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                    RowBox[{
+                    "j", ",", "\"\<media\>\"", ",", "\"\<locations\>\"", ",", 
+                    "1", ",", "\"\<location\>\""}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"ext", "=", 
+                    RowBox[{"StringReplace", "[", 
+                    RowBox[{
+                    RowBox[{"StringExtract", "[", 
+                    RowBox[{"imageURL", ",", 
+                    RowBox[{"\"\</\>\"", "->", 
+                    RowBox[{"-", "1"}]}], ",", 
+                    RowBox[{"\"\<.\>\"", "->", 
+                    RowBox[{"-", "1"}]}], ",", 
+                    RowBox[{"\"\<?\>\"", "->", "1"}]}], "]"}], ",", 
+                    RowBox[{"\"\<jpeg\>\"", "->", "\"\<jpg\>\""}]}], "]"}]}], 
+                    ";", "\[IndentingNewLine]", 
+                    RowBox[{"Check", "[", 
+                    RowBox[{
+                    RowBox[{"URLDownload", "[", 
+                    RowBox[{"imageURL", ",", 
+                    RowBox[{
+                    "createdDate", "<>", "\"\< - \>\"", "<>", "postID", 
+                    "<>", "\"\< - \>\"", "<>", 
+                    RowBox[{"IntegerString", "[", 
+                    RowBox[{"j", ",", "10", ",", "2"}], "]"}], 
+                    "<>", "\"\<.\>\"", "<>", "ext"}]}], "]"}], ",", 
+                    RowBox[{"Print", "[", 
+                    RowBox[{"\"\<\:7b2c\>\"", "<>", 
+                    RowBox[{"ToString", "[", "i", "]"}], 
+                    "<>", "\"\<\:4e2a\:5e16\:5b50\:ff08\>\"", "<>", "postID", 
+                    "<>", "\"\<\:ff09\:7684\:7b2c\>\"", "<>", 
+                    RowBox[{"ToString", "[", "j", "]"}], 
+                    "<>", "\"\<\:4e2a\:9644\:4ef6\:4e0b\:8f7d\:62a5\:9519\
+\:ff01\>\""}], "]"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"(*", "\:89c6\:9891", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                    RowBox[{"j", ",", "\"\<media\>\"", ",", "\"\<type\>\""}], 
+                    "]"}], "==", "2"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Which", "[", "\[IndentingNewLine]", 
+                    RowBox[{"(*", "\:5982\:679cmpd\:5b58\:5728", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"temp", "=", 
+                    RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                    RowBox[{
+                    "j", ",", "\"\<media\>\"", ",", "\"\<variants\>\"", ",", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", "\"\<mimetype\>\"", "]"}], 
+                    "==", "\"\<application/dash+xml\>\""}], "&"}], "]"}]}], 
+                    "]"}]}], ";", 
+                    RowBox[{
+                    RowBox[{"Length", "[", "temp", "]"}], "==", "1"}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Check", "[", 
+                    RowBox[{
+                    RowBox[{"DownloadVideoFromMPD", "[", 
+                    RowBox[{
+                    RowBox[{"URLBuild", "[", 
+                    RowBox[{
+                    RowBox[{"temp", "[", 
+                    RowBox[{
+                    "1", ",", "\"\<locations\>\"", ",", "1", 
+                    ",", "\"\<location\>\""}], "]"}], ",", 
+                    RowBox[{"Normal", "[", 
+                    RowBox[{"temp", "[", 
+                    RowBox[{
+                    "1", ",", "\"\<locations\>\"", ",", "1", 
+                    ",", "\"\<metadata\>\""}], "]"}], "]"}]}], "]"}], ",", 
+                    RowBox[{
+                    "createdDate", "<>", "\"\< - \>\"", "<>", "postID", 
+                    "<>", "\"\< - \>\"", "<>", 
+                    RowBox[{"IntegerString", "[", 
+                    RowBox[{"j", ",", "10", ",", "2"}], "]"}], 
+                    "<>", "\"\<.mp4\>\""}], ",", "header"}], "]"}], ",", 
+                    RowBox[{"Print", "[", 
+                    RowBox[{"\"\<\:7b2c\>\"", "<>", 
+                    RowBox[{"ToString", "[", "i", "]"}], 
+                    "<>", "\"\<\:4e2a\:5e16\:5b50\:ff08\>\"", "<>", "postID", 
+                    "<>", "\"\<\:ff09\:7684\:7b2c\>\"", "<>", 
+                    RowBox[{"ToString", "[", "j", "]"}], 
+                    "<>", "\"\<\:4e2a\:9644\:4ef6\:4e0b\:8f7d\:62a5\:9519\
+\:ff01\>\""}], "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"(*", "\:5982\:679cm3u8\:5b58\:5728", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"temp", "=", 
+                    RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                    RowBox[{
+                    "j", ",", "\"\<media\>\"", ",", "\"\<variants\>\"", ",", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", "\"\<mimetype\>\"", "]"}], 
+                    "==", "\"\<application/vnd.apple.mpegurl\>\""}], "&"}], 
+                    "]"}]}], "]"}]}], ";", 
+                    RowBox[{
+                    RowBox[{"Length", "[", "temp", "]"}], "==", "1"}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Head", "[", 
+                    RowBox[{"URLBuild", "[", 
+                    RowBox[{
+                    RowBox[{"temp", "[", 
+                    RowBox[{
+                    "1", ",", "\"\<locations\>\"", ",", "1", 
+                    ",", "\"\<location\>\""}], "]"}], ",", 
+                    RowBox[{"Normal", "[", 
+                    RowBox[{"temp", "[", 
+                    RowBox[{
+                    "1", ",", "\"\<locations\>\"", ",", "1", 
+                    ",", "\"\<metadata\>\""}], "]"}], "]"}]}], "]"}], "]"}], "=!=",
+                     "String"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Print", "[", 
+                    RowBox[{"\"\<\:7b2c\>\"", "<>", 
+                    RowBox[{"ToString", "[", "i", "]"}], 
+                    "<>", "\"\<\:4e2a\:5e16\:5b50\:ff08\>\"", "<>", "postID", 
+                    "<>", "\"\<\:ff09\:7684m3u8\:94fe\:63a5\:4e0d\:5b58\:5728\
+\:ff0c\:4e0b\:8f7dmp4\:4f5c\:4e3a\:66ff\:4ee3\>\""}], "]"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"DownloadFileFromURL", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                    RowBox[{
+                    "j", ",", "\"\<media\>\"", ",", "\"\<locations\>\"", ",", 
+                    "1", ",", "\"\<location\>\""}], "]"}], ",", 
+                    RowBox[{
+                    "createdDate", "<>", "\"\< - \>\"", "<>", "postID", 
+                    "<>", "\"\< - \>\"", "<>", 
+                    RowBox[{"IntegerString", "[", 
+                    RowBox[{"j", ",", "10", ",", "2"}], "]"}], 
+                    "<>", "\"\<.mp4\>\""}], ",", "header"}], "]"}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Check", "[", 
+                    RowBox[{
+                    RowBox[{"DownloadVideoFromM3U8", "[", 
+                    RowBox[{
+                    RowBox[{"URLBuild", "[", 
+                    RowBox[{
+                    RowBox[{"temp", "[", 
+                    RowBox[{
+                    "1", ",", "\"\<locations\>\"", ",", "1", 
+                    ",", "\"\<location\>\""}], "]"}], ",", 
+                    RowBox[{"Normal", "[", 
+                    RowBox[{"temp", "[", 
+                    RowBox[{
+                    "1", ",", "\"\<locations\>\"", ",", "1", 
+                    ",", "\"\<metadata\>\""}], "]"}], "]"}]}], "]"}], ",", 
+                    RowBox[{
+                    "createdDate", "<>", "\"\< - \>\"", "<>", "postID", 
+                    "<>", "\"\< - \>\"", "<>", 
+                    RowBox[{"IntegerString", "[", 
+                    RowBox[{"j", ",", "10", ",", "2"}], "]"}], 
+                    "<>", "\"\<.mp4\>\""}], ",", "header"}], "]"}], ",", 
+                    RowBox[{"Print", "[", 
+                    RowBox[{"\"\<\:7b2c\>\"", "<>", 
+                    RowBox[{"ToString", "[", "i", "]"}], 
+                    "<>", "\"\<\:4e2a\:5e16\:5b50\:ff08\>\"", "<>", "postID", 
+                    "<>", "\"\<\:ff09\:7684\:7b2c\>\"", "<>", 
+                    RowBox[{"ToString", "[", "j", "]"}], 
+                    "<>", "\"\<\:4e2a\:9644\:4ef6\:4e0b\:8f7d\:62a5\:9519\
+\:ff01\>\""}], "]"}]}], "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"(*", "\:5982\:679cmp4\:5b58\:5728", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"temp", "=", 
+                    RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                    RowBox[{
+                    "j", ",", "\"\<media\>\"", ",", "\"\<variants\>\"", ",", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", "\"\<mimetype\>\"", "]"}], 
+                    "==", "\"\<video/mp4\>\""}], "&"}], "]"}]}], "]"}]}], ";", 
+                    RowBox[{
+                    RowBox[{"Length", "[", "temp", "]"}], ">=", "1"}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Check", "[", 
+                    RowBox[{
+                    RowBox[{"DownloadFileFromURL", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "[", 
+                    RowBox[{
+                    "j", ",", "\"\<media\>\"", ",", "\"\<locations\>\"", ",", 
+                    "1", ",", "\"\<location\>\""}], "]"}], ",", 
+                    RowBox[{
+                    "createdDate", "<>", "\"\< - \>\"", "<>", "postID", 
+                    "<>", "\"\< - \>\"", "<>", 
+                    RowBox[{"IntegerString", "[", 
+                    RowBox[{"j", ",", "10", ",", "2"}], "]"}], 
+                    "<>", "\"\<.mp4\>\""}], ",", "header"}], "]"}], ",", 
+                    RowBox[{"Print", "[", 
+                    RowBox[{"\"\<\:7b2c\>\"", "<>", 
+                    RowBox[{"ToString", "[", "i", "]"}], 
+                    "<>", "\"\<\:4e2a\:5e16\:5b50\:ff08\>\"", "<>", "postID", 
+                    "<>", "\"\<\:ff09\:7684\:7b2c\>\"", "<>", 
+                    RowBox[{"ToString", "[", "j", "]"}], 
+                    "<>", "\"\<\:4e2a\:9644\:4ef6\:4e0b\:8f7d\:62a5\:9519\
+\:ff01\>\""}], "]"}]}], "]"}], ",", "\[IndentingNewLine]", "True", ",", 
+                    RowBox[{"Print", "[", 
+                    RowBox[{"\"\<\:7b2c\>\"", "<>", 
+                    RowBox[{"ToString", "[", "i", "]"}], 
+                    "<>", "\"\<\:4e2a\:5e16\:5b50\:ff08\>\"", "<>", "postID", 
+                    "<>", "\"\<\:ff09\:7684\:7b2c\>\"", "<>", 
+                    RowBox[{"ToString", "[", "j", "]"}], 
+                    "<>", "\"\<\:4e2a\:9644\:4ef6\:7c7b\:578b\:6709\:8bef\
+\:ff01\>\""}], "]"}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]",
+                     "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    "(*", "\:5bfc\:51fa\:6587\:5b57\:5185\:5bb9", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"pollContent", "=", 
+                    RowBox[{"StringRiffle", "[", 
+                    RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"\"\<\\n(*\>\"", "<>", 
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"pollJoinedDataset", "[", 
+                    RowBox[{"j", ",", "\"\<title\>\""}], "]"}], "]"}], 
+                    "<>", "\"\<*)\\n\>\"", "<>", 
+                    RowBox[{"ToString", "[", 
+                    RowBox[{
+                    RowBox[{"Normal", "[", 
+                    RowBox[{"pollJoinedDataset", "[", 
+                    RowBox[{"j", ",", "\"\<options\>\"", ",", "All", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<title\>\"", ",", "\"\<voteCount\>\""}], 
+                    "}"}]}], "]"}], "]"}], ",", "InputForm"}], "]"}]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"j", ",", "1", ",", 
+                    RowBox[{"Length", "[", "pollJoinedDataset", "]"}]}], 
+                    "}"}]}], "]"}], ",", "\"\<\\n\>\""}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"File", "[", 
+                    RowBox[{"Export", "[", 
+                    RowBox[{
+                    RowBox[{
+                    "createdDate", "<>", "\"\< - \>\"", "<>", "postID", 
+                    "<>", "\"\< - \>\"", "<>", 
+                    RowBox[{"IntegerString", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Length", "[", 
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "]"}], "+",
+                     "1"}], ",", "10", ",", "2"}], "]"}], 
+                    "<>", "\"\<.txt\>\""}], ",", 
+                    RowBox[{
+                    RowBox[{"postDataset", "[", 
+                    RowBox[{"i", ",", "\"\<content\>\""}], "]"}], "<>", 
+                    "pollContent"}]}], "]"}], "]"}]}]}], "]"}]}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"{", 
+                  RowBox[{"j", ",", "1", ",", 
+                   RowBox[{
+                    RowBox[{"Length", "[", 
+                    RowBox[{"mediaJoinedDataset", "[", "3", "]"}], "]"}], "+",
+                     "1"}]}], "}"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+             "]"}]}], "\[IndentingNewLine]", ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "n1", ",", 
+             RowBox[{"Min", "[", 
+              RowBox[{
+               RowBox[{"Length", "[", "postDataset", "]"}], ",", "n2"}], 
+              "]"}]}], "}"}]}], "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{"(*", "\:4ec5\:4e0b\:8f7d\:7b2cn\:4e2a", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"FanslyDownload", "[", 
+      RowBox[{
+       RowBox[{"userURL_", "/;", 
+        RowBox[{"StringMatchQ", "[", 
+         RowBox[{"userURL", ",", 
+          
+          RowBox[{"\"\<https://fansly.com/\>\"", "~~", "__", 
+           "~~", "\"\</posts\>\""}]}], "]"}]}], ",", "dir_String", ",", 
+       RowBox[{
+        RowBox[{"{", "n_Integer", "}"}], "/;", 
+        RowBox[{"n", ">=", "1"}]}]}], "]"}], ":=", 
+     RowBox[{"FanslyDownload", "[", 
+      RowBox[{"userURL", ",", "dir", ",", 
+       RowBox[{"{", 
+        RowBox[{"n", ",", "n"}], "}"}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{"(*", 
+    RowBox[{"\:4e0b\:8f7d\:524dn\:4e2a", "\:ff0c", 
+     RowBox[{
+      SuperscriptBox["\:9ed8\:8ba410", "8"], "\:4e2a"}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"FanslyDownload", "[", 
+      RowBox[{
+       RowBox[{"userURL_", "/;", 
+        RowBox[{"StringMatchQ", "[", 
+         RowBox[{"userURL", ",", 
+          
+          RowBox[{"\"\<https://fansly.com/\>\"", "~~", "__", 
+           "~~", "\"\</posts\>\""}]}], "]"}]}], ",", "dir_String", ",", 
+       RowBox[{"n", ":", 
+        RowBox[{"(", 
+         RowBox[{"n_Integer", "/;", 
+          RowBox[{"n", ">=", "1"}]}], ")"}], ":", 
+        SuperscriptBox["10", "8"]}]}], "]"}], ":=", 
+     RowBox[{"FanslyDownload", "[", 
+      RowBox[{"userURL", ",", "dir", ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "n"}], "}"}]}], "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.932932723165207*^9, 3.932932747120964*^9}, {
+   3.9329327774323273`*^9, 3.9329327997066593`*^9}, {3.932932835999628*^9, 
+   3.9329328439085274`*^9}, {3.932932898575424*^9, 3.932932900118227*^9}, {
+   3.9329330375293083`*^9, 3.9329330521516037`*^9}, {3.9329331808531322`*^9, 
+   3.932933237027172*^9}, {3.932933314743326*^9, 3.9329333357282124`*^9}, {
+   3.932933391665064*^9, 3.9329334002781544`*^9}, {3.9329335210710793`*^9, 
+   3.9329335512771225`*^9}, 3.9329335820288506`*^9, {3.9329336689291916`*^9, 
+   3.932933680455513*^9}, {3.9329338336303864`*^9, 3.9329339320598793`*^9}, {
+   3.932933992634638*^9, 3.9329339969606056`*^9}, {3.932934054715887*^9, 
+   3.9329341020529385`*^9}, {3.932934204578636*^9, 3.93293420555081*^9}, 
+   3.932934241771454*^9, {3.9329342718510456`*^9, 3.932934369899744*^9}, {
+   3.9329344413227787`*^9, 3.932934476436693*^9}, {3.932934553547558*^9, 
+   3.932934593758383*^9}, {3.932934652984514*^9, 3.932934656058172*^9}, 
+   3.9329347175477047`*^9, {3.9329347628392677`*^9, 3.932934866785574*^9}, {
+   3.9329349078813553`*^9, 3.932934910991297*^9}, {3.932934969102566*^9, 
+   3.9329349803852425`*^9}, {3.9329352009509315`*^9, 
+   3.9329352028696117`*^9}, {3.933066635083887*^9, 3.933066733143667*^9}, {
+   3.933066779522518*^9, 3.9330668601533604`*^9}, {3.933066896783186*^9, 
+   3.933066987171835*^9}, 3.9330670287572765`*^9, {3.9330671512087765`*^9, 
+   3.933067327894188*^9}, {3.933067450393448*^9, 3.9330675153139687`*^9}, {
+   3.9330675569345856`*^9, 3.933067597456957*^9}, {3.9330677217118835`*^9, 
+   3.933067725815197*^9}, {3.933067934280365*^9, 3.933067980179386*^9}, 
+   3.933068076301794*^9, 3.933068109475401*^9, {3.933068165949951*^9, 
+   3.9330681690237465`*^9}, {3.933564362377369*^9, 3.933564521232897*^9}, 
+   3.9335649652147636`*^9, {3.933565388541334*^9, 3.933565389635273*^9}, {
+   3.9335654290831165`*^9, 3.933565436279253*^9}, {3.933565554909382*^9, 
+   3.9335655603613033`*^9}, {3.9341091822945385`*^9, 3.934109183030367*^9}, 
+   3.934109701187025*^9, {3.9341956211336136`*^9, 3.9341956715421715`*^9}, {
+   3.934195806025814*^9, 3.934195886886652*^9}, 3.934717244028673*^9, {
+   3.934754801556057*^9, 3.934754872742277*^9}, {3.9347549180044136`*^9, 
+   3.9347549245198536`*^9}, {3.9347549992362003`*^9, 3.934755058728647*^9}, {
+   3.9347551072318535`*^9, 3.9347551164563503`*^9}, {3.9347566433208103`*^9, 
+   3.9347566450386105`*^9}, 3.950938437175955*^9, 
+   3.950939027649084*^9},ExpressionUUID->"16ce2b5c-c208-6f48-a6f1-\
+58e0ac5d5731"],
+
+Cell[BoxData[
+ RowBox[{"FanslyDownload", "[", 
+  RowBox[{"\"\<https://fansly.com/\[FilledRectangle]\[FilledRectangle]\
+\[FilledRectangle]\[FilledRectangle]\[FilledRectangle]\[FilledRectangle]/\
+posts\>\"", 
+   ",", "\"\<D:\\\\\[FilledRectangle]\[FilledRectangle]\[FilledRectangle]\
+\[FilledRectangle]\[FilledRectangle]\[FilledRectangle]\>\"", ",", "1"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.9341091866631737`*^9, 3.934109186826971*^9}, {
+   3.934115940926716*^9, 3.9341159462673683`*^9}, {3.934195725214382*^9, 
+   3.934195727481249*^9}, {3.9341966836569614`*^9, 3.9341966957253914`*^9}, {
+   3.9341969659870186`*^9, 3.9341969701146927`*^9}, {3.9343549989353333`*^9, 
+   3.9343550017112637`*^9}, 3.934717467245243*^9, {3.934717534347622*^9, 
+   3.9347175344899635`*^9}, {3.934754065562914*^9, 3.9347540737924976`*^9}, {
+   3.9347541934624023`*^9, 3.93475419422604*^9}, {3.934754358964714*^9, 
+   3.9347543600469303`*^9}, {3.9347545285811005`*^9, 3.934754529486887*^9}, {
+   3.934770399157591*^9, 3.9347704018920593`*^9}, {3.9347706095791416`*^9, 
+   3.934770613843981*^9}, 3.9356639849602184`*^9, 3.937184935766306*^9, {
+   3.9494702255531063`*^9, 3.94947022569092*^9}, {3.950938448543791*^9, 
+   3.9509384596377163`*^9}},ExpressionUUID->"17851abf-6713-6448-9a15-\
+d94922797bc9"]
+}, Open  ]]
+},
+WindowSize->{1269, 721},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (2024\:5e7412\:670826\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"ea7cd387-4fe2-e34f-aa15-beb73af8dbda"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[1482, 35, 220, 4, 66, "Section",ExpressionUUID->"78136e59-7583-b746-b937-e350159ac2f5"],
+Cell[1705, 41, 5055, 113, 417, "Input",ExpressionUUID->"68fb5111-29f5-1642-8338-e7c667090edb"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6797, 159, 220, 4, 66, "Section",ExpressionUUID->"062d0e97-5b76-6e40-94ad-1959513e77fc"],
+Cell[7020, 165, 44261, 919, 3899, "Input",ExpressionUUID->"16ce2b5c-c208-6f48-a6f1-58e0ac5d5731"],
+Cell[51284, 1086, 1285, 20, 28, "Input",ExpressionUUID->"17851abf-6713-6448-9a15-d94922797bc9"]
+}, Open  ]]
+}
+]
+*)
+
